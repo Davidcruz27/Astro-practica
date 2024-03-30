@@ -2,9 +2,21 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<nav>
-	<div class="flex justify-between my-6">
-		<Icon name="logo" width={206} height={44} />
-		<Icon name="listnavbar" width={206} height={44} />
+<nav class="flex justify-between items-center my-6">
+	<div>
+		<a href="/" class="cursor-pointer">
+			<Icon name="logo" width={206} height={44} />
+		</a>
 	</div>
+	<button class="p-2 rounded-md hover:bg-blue-600" id="nav_button">
+		<Icon name="listnavbar" width={44} height={44} />
+	</button>
 </nav>
+<script>
+	import { isSideMenuOpen } from "../store";
+	const button = document.getElementById("nav_button");
+	const handleOpenSideMenu = () => {
+		isSideMenuOpen.set(true);
+	};
+	button?.addEventListener("click", () => handleOpenSideMenu());
+</script>

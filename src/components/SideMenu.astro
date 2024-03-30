@@ -1,0 +1,44 @@
+---
+import { Icon } from "astro-icon/components";
+import type { Links } from "../data/layout/links.ts";
+import { linksData } from "../data/layout/links";
+import Link from "../components/Link.astro";
+---
+
+<div
+	class="bg-black w-screen h-full fixed top-0 right-0 opacity-70 backdrop-blur-md hidden"
+	id="side_menu_bg"
+>
+</div>
+<div
+	class="bg-blue-800 fixed top-0 -right-[500px] h-screen p-6 z-10 transition-all w-[270px] md:w-[350px] lg:w-[450px]"
+	id="side_menu"
+>
+	<nav class="flex flex-col">
+		<button
+			class="p-2 rounded-md hover:bg-blue-600 self-end"
+			id="side_menu_equis"
+		>
+			<Icon name="equis" size={32} />
+		</button>
+		{linksData.map((link: Links) => <Link {...link} />)}
+	</nav>
+</div>
+<script>
+	import { isSideMenuOpen } from "../store";
+	const sideMenu = document.getElementById("side_menu");
+	const sideMenuBg = document.getElementById("side_menu_bg");
+
+	// Escucha los cambios en el store y muestra/oculta el diálogo en consecuencia
+	isSideMenuOpen.subscribe((open: boolean) => {
+		if (sideMenu && sideMenuBg) {
+			if (open) {
+				sideMenuBg.classList.remove("hidden");
+				sideMenu.classList.remove("-right-[500px]");
+				sideMenu.classList.add("right-0");
+			} else {
+				//
+			}
+		}
+	});
+</script>
