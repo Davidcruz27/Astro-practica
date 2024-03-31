@@ -18,5 +18,5 @@ import { Icon } from "astro-icon/components";
 	const handleOpenSideMenu = () => {
 		isSideMenuOpen.set(true);
 	};
-	button?.addEventListener("click", () => handleOpenSideMenu());
+	button?.addEventListener("click", handleOpenSideMenu);
 </script>

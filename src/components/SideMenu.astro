@@ -17,7 +17,7 @@ import Link from "../components/Link.astro";
 	<nav class="flex flex-col">
 		<button
 			class="p-2 rounded-md hover:bg-blue-600 self-end"
-			id="side_menu_equis"
+			id="side_equis"
 		>
 			<Icon name="equis" size={32} />
 		</button>
@@ -28,6 +28,11 @@ import Link from "../components/Link.astro";
 	import { isSideMenuOpen } from "../store";
 	const sideMenu = document.getElementById("side_menu");
 	const sideMenuBg = document.getElementById("side_menu_bg");
+    const sideMenuEquis = document.getElementById("side_equis");
+
+    const handleCloseSideMenu  = () => {
+        isSideMenuOpen.set(false);
+    }
 
 	// Escucha los cambios en el store y muestra/oculta el diálogo en consecuencia
 	isSideMenuOpen.subscribe((open: boolean) => {
@@ -37,8 +42,15 @@ import Link from "../components/Link.astro";
 				sideMenu.classList.remove("-right-[500px]");
 				sideMenu.classList.add("right-0");
 			} else {
-				//
+				sideMenuBg.classList.add("hidden");
+				sideMenu.classList.remove("right-0");
+                sideMenu.classList.add("-right-[500px]")
 			}
 		}
 	});
+
+    if (sideMenuEquis && sideMenuBg) {
+        sideMenuEquis.addEventListener("click",  handleCloseSideMenu);
+        sideMenuBg.addEventListener("click",  handleCloseSideMenu);
+    }
 </script>
